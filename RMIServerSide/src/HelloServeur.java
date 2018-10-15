@@ -1,5 +1,7 @@
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelloServeur extends UnicastRemoteObject implements HelloInterface 
 {
@@ -14,6 +16,7 @@ public class HelloServeur extends UnicastRemoteObject implements HelloInterface
 		System.out.println("Hello world: " + msg);
 		return "Hello world: " + msg;
 	}
+	
 	
 	public static void main(String args[])
 	{

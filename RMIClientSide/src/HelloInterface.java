@@ -11,5 +11,7 @@ public interface HelloInterface extends java.rmi.Remote
    */
 
   public String say() throws java.rmi.RemoteException;
+
+
 }
 

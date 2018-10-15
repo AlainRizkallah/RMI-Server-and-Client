@@ -23,32 +23,36 @@ public class StudentImpl extends UnicastRemoteObject implements StudentInterface
 //		System.out.println("exams: ");
 //		System.out.println(sco);
 //		S.setScores(sco);
+		int i=S.getId();
 		Exam ex = new Exam(id, exam, coef);
-		S.getScores().add(ex);
-
+		for (Student s:PromotionImpl.Promo)
+			if(s.getId()==i)
+				s.getScores().add(ex);
 	}
 
 	public String print_exam(Student S) throws RemoteException {
+		int id=S.getId();
 		String out="";
-		for(Exam i:S.getScores()) {
+		for(Student student:PromotionImpl.Promo)
+		if(student.getId()==id)
+		for(Exam i:student.getScores()) {
 			out=out+" "+i.getValue();
 		}
-		System.out.println(S.getScores());
 		return(out);
 	}
 
 	public double calculate_average(Student S) throws RemoteException {
-		return 0;
-//		List<Double> co = S.getCoefs();
-//		List<Double> sco= S.getScores();
-//		double M=0;
-//		double C=0;
-//		for(int i=0;i<sco.size();i++) {
-//			M=M+sco.get(i)*co.get(i);
-//			C=C+co.get(i);
-//		}
-//		double av= M/C;
-//		return av;
+		int id=S.getId();
+		double M=0;
+		double C=0;
+		for(Student s: PromotionImpl.Promo)
+			if(s.getId()==id) {
+				for (Exam e: s.getScores()) {
+					M=M+(e.getValue())*e.getCoef();
+					C=C+e.getCoef();}
+			}
+		double av= M/C;
+		return av;
 	}
 
 }

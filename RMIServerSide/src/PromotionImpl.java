@@ -3,7 +3,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class PromotionImpl extends UnicastRemoteObject implements PromotionInterface{
-	private ArrayList<Student> Promo =new ArrayList<>();
+	public static ArrayList<Student> Promo =new ArrayList<>();
 	
 	protected PromotionImpl() throws RemoteException {
 		super();
@@ -29,7 +29,18 @@ public class PromotionImpl extends UnicastRemoteObject implements PromotionInter
 	}
 
 	
-	public void promotion_score() throws RemoteException {
+	public String promotion_score() throws RemoteException {
+		double N=0;
+		double D=0;
+		for(Student student: Promo) {
+			for(Exam exam: student.getScores()) {
+				N=N+exam.getValue()*exam.getCoef();
+				D=D+exam.getCoef();
+				}		
+		}
+			double d= N/D;
+		
+		return String.valueOf(d);
 		// TODO Auto-generated method stub
 		
 	}
